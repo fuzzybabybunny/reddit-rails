@@ -16,8 +16,16 @@ class PostsController < ApplicationController
   def create
     # post = Post.new(title: params[:post][:title], url: params[:post][:title])
     post = Post.new(post_params)
-    if post.save
+    
+    if post.save # this goes to the model and check all the validations before it gets saved
+      # if validation passes, then it saves, and it returns true
+      # otherwise, it returns false
       redirect_to posts_path
+    else
+      # if the record doesnt save because it didnt pass the validations
+      flash[:message] = post.errors.messages[:base]
+
+      redirect_to :back
     end
   end
 
