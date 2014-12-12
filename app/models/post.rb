@@ -28,10 +28,10 @@ class Post < ActiveRecord::Base
     # the latest post
     # get the posted time for the latest post
     last_post = Post.order(:created_at).last
-    latest_time = last_post.created_at
+    # latest_time = last_post.created_at
 
     # goal: the user can only post after 1 minute
-    if latest_time > 1.minute.ago
+    if Post.any? and last_post.created_at > 1.minute.ago
       # if this is true, the last post was made in less 1 minute ago, so please raise an error
       self.errors.add(:base, "Cannot post within 1 minute")
     end

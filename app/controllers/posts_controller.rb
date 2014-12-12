@@ -23,7 +23,10 @@ class PostsController < ApplicationController
       redirect_to posts_path
     else
       # if the record doesnt save because it didnt pass the validations
-      flash[:message] = post.errors.messages[:base]
+
+      puts 'HELLO'
+      flash[:message] = post.errors.messages
+      puts flash
 
       redirect_to :back
     end
