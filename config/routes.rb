@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   # get '/posts/new' => 'posts#new'
 
   resources :posts
+  resources :comments
 
   # resources :posts
   # /posts/

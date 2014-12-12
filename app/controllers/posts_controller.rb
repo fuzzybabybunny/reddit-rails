@@ -15,7 +15,7 @@ class PostsController < ApplicationController
   # this is also function
   def create
     # post = Post.new(title: params[:post][:title], url: params[:post][:title])
-    post = Post.new(post_params)
+    post = current_user.posts.create(post_params)
     
     if post.save # this goes to the model and check all the validations before it gets saved
       # if validation passes, then it saves, and it returns true
@@ -38,6 +38,16 @@ class PostsController < ApplicationController
 
     # this basically retrieve the post with a specific id
     @post = Post.find(params[:id])
+    @comment = Comment.new
+  end
+
+  # this only shows 1 post
+  def destroy
+    # params[:id] will look for the id in the URL
+
+    # this basically retrieve the post with a specific id
+    Post.destroy(params[:id])
+    redirect_to :back
   end
 
   # this is only for internal use
